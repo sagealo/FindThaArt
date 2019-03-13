@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_array">
+        <item>Object</item>
+        <item>Person</item>
+        <item>Exhibition</item>
+        <item>Publication</item>
+        <item>Culture</item>
+        <item>Period</item>
+        <item>Century</item>
+    </string-array>
+</resources>
