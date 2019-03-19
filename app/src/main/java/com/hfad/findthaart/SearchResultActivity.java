@@ -2,10 +2,13 @@ package com.hfad.findthaart;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArtResponse response;
     private ListView searchResultList;
@@ -15,7 +18,7 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
         wireWidgets();
-
+        searchResultList.setOnItemClickListener(this);
         populateListView();
 
     }
@@ -37,5 +40,15 @@ public class SearchResultActivity extends AppCompatActivity {
 
     private void wireWidgets() {
         searchResultList = findViewById(R.id.listview_searchresultactivity_searchresults);
+    }
+
+
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        int index = searchResultList.indexOfChild(view);
+        Toast.makeText(SearchResultActivity.this, "index " + index, Toast.LENGTH_SHORT).show();
+
     }
 }
