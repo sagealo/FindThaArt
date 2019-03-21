@@ -9,6 +9,8 @@ public class Record implements Parcelable {
     private String department;
     private String title;
     private String primaryImageUrl;
+    private String person;
+
 
     public int getObjectId() {
         return objectId;
@@ -55,6 +57,7 @@ public class Record implements Parcelable {
         return "Record{" +
                 "objectId=" + objectId +
                 ", culture='" + culture + '\'' +
+                ", artistName='" + person + '\'' +
                 ", department='" + department + '\'' +
                 ", title='" + title + '\'' +
                 ", primaryImageUrl=" + primaryImageUrl +
@@ -67,6 +70,7 @@ public class Record implements Parcelable {
         department = in.readString();
         title = in.readString();
         primaryImageUrl = in.readString();
+        person = in.readString();
     }
 
     @Override
@@ -81,6 +85,7 @@ public class Record implements Parcelable {
         dest.writeString(department);
         dest.writeString(title);
         dest.writeString(primaryImageUrl);
+        dest.writeString(person);
     }
 
     @SuppressWarnings("unused")
@@ -95,4 +100,12 @@ public class Record implements Parcelable {
             return new Record[size];
         }
     };
+
+    public String getArtist() {
+        return person;
+    }
+
+    public void setArtist(String artist) {
+        this.person = artist;
+    }
 }
