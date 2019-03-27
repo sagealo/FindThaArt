@@ -1,7 +1,11 @@
 package com.hfad.findthaart;
 
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.io.InputStream;
+import java.net.URL;
 
 public class Record implements Parcelable {
     private int objectId;
@@ -9,7 +13,7 @@ public class Record implements Parcelable {
     private String department;
     private String title;
     private String primaryImageUrl;
-    private String person;
+    private String keyWord;
 
 
     public int getObjectId() {
@@ -57,7 +61,7 @@ public class Record implements Parcelable {
         return "Record{" +
                 "objectId=" + objectId +
                 ", culture='" + culture + '\'' +
-                ", artistName='" + person + '\'' +
+                ", artistName='" + keyWord + '\'' +
                 ", department='" + department + '\'' +
                 ", title='" + title + '\'' +
                 ", primaryImageUrl=" + primaryImageUrl +
@@ -70,7 +74,7 @@ public class Record implements Parcelable {
         department = in.readString();
         title = in.readString();
         primaryImageUrl = in.readString();
-        person = in.readString();
+        keyWord = in.readString();
     }
 
     @Override
@@ -85,7 +89,7 @@ public class Record implements Parcelable {
         dest.writeString(department);
         dest.writeString(title);
         dest.writeString(primaryImageUrl);
-        dest.writeString(person);
+        dest.writeString(keyWord);
     }
 
     @SuppressWarnings("unused")
@@ -102,10 +106,21 @@ public class Record implements Parcelable {
     };
 
     public String getArtist() {
-        return person;
+        return keyWord;
     }
 
     public void setArtist(String artist) {
-        this.person = artist;
+        this.keyWord = artist;
+    }
+
+    public static Drawable LoadImageFromWebOperations(int url) {
+        try {
+            InputStream is = (InputStream) new URL("https://iiif.harvardartmuseums.org/manifests/object/"
+                    + Integer.toString(url)).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

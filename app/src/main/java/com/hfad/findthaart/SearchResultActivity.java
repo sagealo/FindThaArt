@@ -58,4 +58,5 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
         startActivity(i);
 
     }
+
 }
